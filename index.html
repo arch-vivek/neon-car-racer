@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>Neon Racer · Campaign Edition</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZAAAAVdJREFUOE9jZGBg+M8ABYxAcB8DMzOzHCMjYzUjI+NPDg6OH0xsbI9e/I0XUGRhYfFhYWH5ycDA8IuBgUFMSEjoPz09/Ue6sj8fGBgY/+Tn5/8VEhL6Ly0t/UVeXv4pqqL/DAwM/6Slpf8rKCj8Y2Vl/aehofGfT0DgP4uOzn8Zff3//xUU/vNzc/9nZWVlYJWV/c/Mw/MfVVGDtPQ/BkNDhAUqqr/ZuLj+S8jI/GfV0oK6+Y+oqKj/fEJC/xkZGf+zKiv/5xIV/c8kKfqfiZPzv4C9/X8WScn/LJycuAaISkj8Z5OTQxzAxPT/Cysr019hYfzfV1LCyP8xVfW/qqrqNzU1tVsLCwvPTU1NH1taWr5oa2t/bWdn9ykhIeH9GRgY/nNzc//n5+f/z8PD85+Xl/c/j4DAf01NzQeRKSn/+cXEYCEC3qB3AAoLCwu/rq7uG1tb2588PDz/ubi4HrOwsPxnZGT8v2/fvtfbt28XKK+1/X53795vAAAAAElFTkSuQmCC"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- PRELOADER -->
+    <div id="preloader">
+      <h2>STARTING…</h2>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+
+    <!-- META UI -->
+    <div id="meta-ui">
+      <div class="stat-box">
+        🪙 <span id="coin-count" class="neon-text">0</span>
+      </div>
+      <button id="open-garage-btn">🏎 GARAGE</button>
+    </div>
+
+    <!-- GAME WRAPPER -->
+    <div class="game-wrapper" id="game-wrapper">
+      <div id="game-container">
+        <div id="road"></div>
+        <div id="player" class="car"></div>
+      </div>
+
+      <!-- UI LAYER -->
+      <div id="ui-layer">
+        <div id="score-board">🏁 <span id="score">0</span></div>
+
+        <div id="level-alert" class="level-banner">ZONE SECURED</div>
+        <div id="near-miss-alert">⚡ NEAR MISS! +25</div>
+        <div id="shield-ui" class="hidden">🛡 SHIELD</div>
+        <div id="weather-layer"></div>
+        <div id="draft-ui">💨 SLIPSTREAM</div>
+
+        <div id="boost-container"><div id="boost-bar"></div></div>
+
+        <!-- Menus -->
+        <div id="start-screen" class="glass-panel">
+          <h1>🏎 NEON RACER</h1>
+          <p>Survive the grid. Unlock new zones.</p>
+          <button id="start-btn">🗺 CAMPAIGN MAP</button>
+        </div>
+
+        <div id="game-over-screen" class="glass-panel hidden">
+          <h1 style="color: #ff4757">💥 SYSTEM FAILURE</h1>
+          <p>Distance: <span id="final-score">0</span>m</p>
+          <p>Coins Salvaged: <span id="run-coins" class="neon-text">0</span></p>
+          <button id="restart-btn">🔄 REBOOT</button>
+        </div>
+
+        <div id="victory-screen" class="glass-panel hidden">
+          <h1 style="color: var(--neon-gold)">🏆 STAGE CLEARED!</h1>
+          <p>Target reached. Next area unlocked.</p>
+          <p>Payout: <span id="victory-coins" class="neon-text">0</span></p>
+          <button id="victory-continue-btn">➡ CONTINUE</button>
+        </div>
+      </div>
+
+      <!-- STAGE SELECT -->
+      <div id="stage-select-screen" class="glass-panel full-screen hidden">
+        <h1>🗺 CAMPAIGN MAP</h1>
+        <div id="stage-grid" class="stage-grid"></div>
+        <button id="back-to-main-btn" style="margin-top: 20px">⬅ BACK</button>
+      </div>
+
+      <!-- GARAGE -->
+      <div id="garage-screen" class="glass-panel full-screen hidden">
+        <h1>🔧 THE GARAGE</h1>
+        <p>Bank: <span id="garage-coins" class="neon-text">0</span> 🪙</p>
+        <div class="upgrade-card">
+          <h3>⚡ Engine Tuning</h3>
+          <p>Permanently boosts handling &amp; speed.</p>
+          <button id="upg-engine">Upgrade Engine</button>
+        </div>
+        <button id="close-garage-btn" style="margin-top: 20px">⬅ EXIT</button>
+      </div>
+
+      <!-- TOUCH CONTROLS -->
+      <div id="touch-controls">
+        <div class="ctrl-group">
+          <button class="touch-btn" id="btn-left" aria-label="Steer Left">
+            ◀
+          </button>
+        </div>
+        <div class="ctrl-group">
+          <button class="touch-btn" id="btn-boost" aria-label="Boost">
+            ⚡ BOOST
+          </button>
+        </div>
+        <div class="ctrl-group">
+          <button class="touch-btn" id="btn-right" aria-label="Steer Right">
+            ▶
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "./Config.js": "./js/Config.js",
+          "./Player.js": "./js/Player.js",
+          "./GameEngine.js": "./js/GameEngine.js",
+          "./AudioEngine.js": "./js/AudioEngine.js"
+        }
+      }
+    </script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
